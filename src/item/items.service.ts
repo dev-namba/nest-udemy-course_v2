@@ -14,17 +14,16 @@ export class ItemsService {
     private itemsRepository: Repository<Item>,
   ) { }
 
-  private items: Item[] = [];
-  findAll(): Item[] {
-    return this.items;
+  async findAll(): Promise<Item[]> {
+    return this.itemsRepository.find();
   }
 
-  findById(id: string): Item {
-    const found = this.items.find(item => item.id === id);
-    if (!found) {
-      throw new NotFoundException();
+  async findById(id: string): Promise<Item> {
+    const item = await this.itemsRepository.findOneBy({ id: id })
+    if (!item) {
+      throw new NotFoundException(`Item with ID ${id} not found`);
     }
-    return found;
+    return item;
   }
 
   async create(createItemDto: CreateItemDto): Promise<Item> {
@@ -41,13 +40,13 @@ export class ItemsService {
     return this.itemsRepository.save(item);
   }
 
-  updateStatus(id: string): Item {
-    const item = this.findById(id);
+  async updateStatus(id: string): Promise<Item> {
+    const item = await this.findById(id);
     item.status = ItemStatus.SOLD_OUT;
-    return item;
+    return this.itemsRepository.save(item);
   }
 
-  delete(id: string): void {
-    this.items = this.items.filter((items) => items.id !== id);
+  async delete(id: string): Promise<void> {
+    this.itemsRepository.delete(id);
   }
 }

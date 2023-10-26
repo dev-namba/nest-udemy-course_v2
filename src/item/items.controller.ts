@@ -8,12 +8,12 @@ import { CreateItemDto } from './dio/create-item.dio';
 export class ItemsController {
   constructor(@Inject(ItemsService) private readonly itemsService: ItemsService) { }
   @Get()
-  findAll(): Item[] {
+  async findAll(): Promise<Item[]> {
     return this.itemsService.findAll();
   }
 
   @Get(':id')
-  findById(@Param('id', ParseUUIDPipe) id: string) {
+  async findById(@Param('id', ParseUUIDPipe) id: string): Promise<Item> {
     return this.itemsService.findById(id);
   }
 
@@ -25,12 +25,12 @@ export class ItemsController {
   }
 
   @Patch(':id')
-  updateStatus(@Param('id', ParseUUIDPipe) id: string): Item {
+  async updateStatus(@Param('id', ParseUUIDPipe) id: string): Promise<Item> {
     return this.itemsService.updateStatus(id);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseUUIDPipe) id: string): void {
-    this.itemsService.delete(id);
+  async delete(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+    return this.itemsService.delete(id);
   }
 }

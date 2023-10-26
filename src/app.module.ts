@@ -7,6 +7,8 @@ import { AppDataSource } from 'ormconfig'
 import { PersonModule } from './person/person.module';
 import { CarModule } from './car/car.module';
 import { ItemsModule } from './item/items.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { ItemsModule } from './item/items.module';
     PersonModule,
     CarModule,
     ItemsModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
