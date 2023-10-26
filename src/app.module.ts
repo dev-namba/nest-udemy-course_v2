@@ -6,15 +6,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSource } from 'ormconfig'
 import { PersonModule } from './person/person.module';
 import { CarModule } from './car/car.module';
+import { ItemsModule } from './item/items.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(AppDataSource.options),
     PersonModule,
-    CarModule
+    CarModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
