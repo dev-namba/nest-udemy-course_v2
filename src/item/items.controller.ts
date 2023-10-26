@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { Item } from './entity/item.entity';
 import { CreateItemDto } from './dio/create-item.dio';
@@ -6,7 +6,7 @@ import { CreateItemDto } from './dio/create-item.dio';
 
 @Controller('items')
 export class ItemsController {
-  constructor(private readonly itemsService: ItemsService) { }
+  constructor(@Inject(ItemsService) private readonly itemsService: ItemsService) { }
   @Get()
   findAll(): Item[] {
     return this.itemsService.findAll();
@@ -18,11 +18,10 @@ export class ItemsController {
   }
 
   @Post()
-  create(
+  async create(
     @Body() createItemDto: CreateItemDto,
-  ): Item {
-
-    return this.itemsService.create(createItemDto);
+  ): Promise<void> {
+    await this.itemsService.create(createItemDto);
   }
 
   @Patch(':id')
