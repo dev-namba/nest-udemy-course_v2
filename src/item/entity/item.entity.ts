@@ -1,6 +1,8 @@
+import { ManyToOne } from 'typeorm';
 
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ItemStatus } from './item-status.enum';
+import { User } from 'src/user/entity/user.entity';
 
 
 @Entity()
@@ -25,4 +27,10 @@ export class Item {
 
   @Column()
   updatedAt: String;
+
+  @ManyToOne(() => User, (user) => user.items)
+  user: User;
+
+  @Column()
+  userId: string;
 }
