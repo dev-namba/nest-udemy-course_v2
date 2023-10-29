@@ -3,9 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppDataSource } from 'ormconfig'
-import { PersonModule } from './person/person.module';
-import { CarModule } from './car/car.module';
+import { AppDataSource } from 'ormconfig';
 import { ItemsModule } from './item/items.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -14,8 +12,6 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(AppDataSource.options),
-    PersonModule,
-    CarModule,
     ItemsModule,
     AuthModule,
     UserModule,
@@ -23,6 +19,4 @@ import { UserModule } from './user/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-
-}
+export class AppModule { }

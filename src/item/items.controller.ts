@@ -3,10 +3,10 @@ import { ItemsService } from './items.service';
 import { Item } from './entity/item.entity';
 import { CreateItemDto } from './dio/create-item.dio';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { GetUser } from 'src/auth/decorator/get-user.decorator';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
 import { User } from 'src/user/entity/user.entity';
 import { UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
-import { Role } from 'src/auth/decorator/role.decorator';
+import { Role } from 'src/auth/decorators/role.decorator';
 import { UserStatus } from 'src/auth/user-status.enum';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 
